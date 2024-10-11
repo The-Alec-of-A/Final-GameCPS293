@@ -6,5 +6,5 @@
 - camera follows player
 - rng generation for arrow image made, but not showing up yet on player's screen
 - technical aspects of jumping updated to look more natural
-- killzone added
-- bossarea added but not yet fully implemented
+- kill zone added
+- boss area added but not yet fully implemented
