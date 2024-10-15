@@ -9,4 +9,4 @@
 - kill zone added
 - boss area added but not yet fully implemented
 - rng arrows and numbers assigned to random arrows show up on player screen
-- player input matching arrow sequence works and correct combinations updates the progress bar that represents the multi-attack's charging status
+- player input matching the arrow sequence works and correct combinations updates the progress bar that represents the multi-attack's charging status
