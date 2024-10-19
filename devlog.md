@@ -1,5 +1,6 @@
-font-size: 20 px;
 <b> Week of 09-29-24- 3.5 hrs: Components added to git repository and game </b>
+2024-09-23 - 6.5hr: Headline of what work was done like "Got the player character working."
+
 font size: 12 px;
 - added final proposal
 - imported character assets
