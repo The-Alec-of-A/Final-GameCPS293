@@ -1,10 +1,11 @@
-Week of 
+Week of 09-29-24- 3.5 hrs: Components added to git repository and game
 - added final proposal
 - imported character assets
 - idle animation created
 - background added
 - added arrow sprite and made edited pngs for all directions
 - camera follows player
+
 - rng generation for arrow image made, but not showing up yet on player's screen
 - technical aspects of jumping updated to look more natural
 - kill zone added
