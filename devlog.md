@@ -5,7 +5,7 @@
 - background added
 - added arrow sprite and made edited pngs for all directions
 - camera follows player
-<b> Week of 10-07-24- </b>
+<b> Week of 10-07-24 </b>
 - rng generation for arrow image made, but not showing up yet on player's screen
 - technical aspects of jumping updated to look more natural
 - kill zone added
