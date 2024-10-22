@@ -15,5 +15,6 @@
 * boss area added but not yet fully implemented
 * rng arrows and numbers assigned to random arrows show up on player screen
 * player input matching the arrow sequence works and correct combinations updates the progress bar that represents the multi-attack's charging status
-### Week of 10-20-24 (current week)- Arrow visibilty modified
+### Week of 10-20-24 (current week)- Arrow processes added
 * arrows disappear and reappear after a set amount of time
+* arrows regenrate multiple times now instead of just once
