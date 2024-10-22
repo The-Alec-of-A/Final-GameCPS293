@@ -7,6 +7,7 @@
 * added arrow sprite and made edited pngs for all directions
 * camera follows player
 ### Week of 10-06-24- 3.5 hrs: Arrow randomizer and more game components added
+* found guide at https://docs.godotengine.org/en/stable/index.html 
 * arrows scene created
 * rng generation for arrow image made, but not showing up yet on player's screen
 * technical aspects of jumping updated to look more natural
