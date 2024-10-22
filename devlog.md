@@ -12,6 +12,7 @@
 * technical aspects of jumping updated to look more natural
 * kill zone added
 ### Week of 10-13-24- 7.5 hrs: More game components added and arrow mechanics closer to completion
+* used ChatGPT for some coding assistance
 * boss area added but not yet fully implemented
 * rng arrows and numbers assigned to random arrows show up on player screen
 * player input matching the arrow sequence works and correct combinations updates the progress bar that represents the multi-attack's charging status
