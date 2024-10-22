@@ -5,11 +5,11 @@
 - background added
 - added arrow sprite and made edited pngs for all directions
 - camera follows player
-<b> Week of 10-07-24- 
+<b> Week of 10-07-24- </b>
 - rng generation for arrow image made, but not showing up yet on player's screen
 - technical aspects of jumping updated to look more natural
 - kill zone added
-<b> Week of 10-14-24
+<b> Week of 10-14-24 <b/>
 - boss area added but not yet fully implemented
 - rng arrows and numbers assigned to random arrows show up on player screen
 - player input matching the arrow sequence works and correct combinations updates the progress bar that represents the multi-attack's charging status
