@@ -1,4 +1,4 @@
-<b> Week of 09-29-24- 3.5 hrs: Components added to git repository and game </b>
+font-size: large <b> Week of 09-29-24- 3.5 hrs: Components added to git repository and game </b>
 - added final proposal
 - imported character assets
 - idle animation created
