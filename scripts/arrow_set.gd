@@ -5,15 +5,15 @@ var rndIndex = [0, 0, 0, 0]
 var images: Array = ["res://assets/other/arrow down.png",
  "res://assets/other/arrow up.png", "res://assets/other/arrow left.png",
  "res://assets/other/arrow right.png"]
-#var checkImageSource = "res://assets/other/checkmark.png"
+var checkImageSource = "res://assets/other/checkmark.png"
 var nums = ["1", "2", "3", "4"]
 var arrowPoint: Array[String] = ["down_arrow", "up_arrow", "left_arrow", "right_arrow"]
 var arrowKey: Array[String] = ["", "", "", ""]
 var arrowIndex = [0, 0, 0, 0]
-var correctCount: int = 0
+var correctCount = 0
 var powerCharge: int = 0
 var fullCharge = false
-var checkMarks: Array[Sprite2D] = []
+var checkMarks: Array[Sprite2D]
 
 @onready var texture_rect: TextureRect = $TextureRect
 @onready var texture_rect_2: TextureRect = $TextureRect2
@@ -32,16 +32,16 @@ var checkMarks: Array[Sprite2D] = []
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass
-	
+		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
 func update_image():
-			
+		
 	nums.shuffle()
 	labelStorage()
-	
+
 	rndIndex[0] = rng.randi_range(0, arrowPoint.size() - 1)
 	texture_rect.texture = load(images[rndIndex[0]])
 	arrowKey[int(nums[0])-1] = arrowPoint[rndIndex[0]]
@@ -58,6 +58,19 @@ func update_image():
 	texture_rect_4.texture = load(images[rndIndex[3]])
 	arrowKey[int(nums[3])-1] = arrowPoint[rndIndex[3]]
 
+	markersAppear()
+	
+	if checkMarks.size() < 4:
+		for i in range(nums.size()):
+			var markTexture = Sprite2D.new()
+			markTexture.texture = load(checkImageSource)
+			add_child(markTexture)
+			checkMarks.append(markTexture)
+			checkMarks[i].visible = false
+			checkMarks[i].z_index = 2
+			
+		checkMarkFormat()
+		
 	arrowsVisible.start()
 
 func labelStorage():
@@ -66,23 +79,15 @@ func labelStorage():
 	label_3.text = nums[2]
 	label_4.text = nums[3]
 
-func arrowCheck(userInput: Array[String]):
+func arrowCheck(userInput: String):
 	
-	if userInput[correctCount] == arrowKey[correctCount]:
-		correctCount += 1
-		
-		if checkMarks.size() < 4:
-			for i in range(nums.size()):
-				var markTexture = Sprite2D.new()
-#				markTexture.texture = load(checkImageSource)
-				add_child(markTexture)
-				checkMarks.append(markTexture)
-				checkMarks[i].visible = false
-#			checkMarkPos()
-#		checkMarks[int(nums[correctCount-1]) - 1].visible = true
-			
-	else:
-		correctCount = 0
+	if arrowsPaused.is_stopped():
+		if userInput == arrowKey[correctCount]:
+			correctCount += 1
+			checkMarks[int(nums[correctCount-1]) - 1].visible = true
+	
+		else:
+			markersDisappear()
 	
 	if correctCount == 4:
 		powerCharge += 1
@@ -93,26 +98,24 @@ func arrowCheck(userInput: Array[String]):
 		fullCharge = true
 
 func _on_arrows_visible_timeout() -> void:
-	arrowsDisappear()
-	
-	for i in range(arrowPoint.size() - 1):
-		arrowKey[i] = "";	
-	arrowsPaused.start()
+	markersDisappear()
 
 func _on_arrows_paused_timeout() -> void:
 	if boss_area.entered == true:
 		update_image()
-	
-		texture_rect.visible = true
-		texture_rect_2.visible = true
-		texture_rect_3.visible = true
-		texture_rect_4.visible = true
-		label_1.visible = true
-		label_2.visible = true
-		label_3.visible = true
-		label_4.visible = true
+		markersAppear()
 
-func arrowsDisappear():
+func markersAppear():
+	texture_rect.visible = true
+	texture_rect_2.visible = true
+	texture_rect_3.visible = true
+	texture_rect_4.visible = true
+	label_1.visible = true
+	label_2.visible = true
+	label_3.visible = true
+	label_4.visible = true
+
+func markersDisappear():
 	texture_rect.visible = false
 	texture_rect_2.visible = false
 	texture_rect_3.visible = false
@@ -122,9 +125,29 @@ func arrowsDisappear():
 	label_3.visible = false
 	label_4.visible = false
 	
-func checkMarkPos():
-	#checkMarks[0].position = Vector2(texture_rect.position.x, texture_rect.position.y)
-	#checkMarks[1].position = Vector2(texture_rect_2.position.x, texture_rect_2.position.y)
-	#checkMarks[2].position = Vector2(texture_rect_3.position.x, texture_rect_3.position.y)
-	#checkMarks[3].position = Vector2(texture_rect_4.position.x, texture_rect_4.position.y)
-	pass
+	for i in range(arrowPoint.size()):
+		arrowKey[i] = "";
+
+	for e in range(checkMarks.size()):
+		checkMarks[e].visible = false
+		
+	correctCount = 0
+	arrowsPaused.start()
+	
+func checkMarkFormat():
+	var xOffset: int = 25
+	var yOffset: int = 15
+	
+	checkMarks[0].position = Vector2(texture_rect.position.x + xOffset, texture_rect \
+	.position.y + yOffset)
+	checkMarks[0].scale = Vector2(0.1, 0.1)
+	checkMarks[1].position = Vector2(texture_rect_2.position.x + xOffset, texture_rect_2 \
+	.position.y + yOffset)
+	checkMarks[1].scale = Vector2(0.1, 0.1)
+	checkMarks[2].position = Vector2(texture_rect_3.position.x + xOffset, texture_rect_3 \
+	.position.y + yOffset)
+	checkMarks[2].scale = Vector2(0.1, 0.1)
+	checkMarks[3].position = Vector2(texture_rect_4.position.x + xOffset, texture_rect_4 \
+	.position.y + yOffset)
+	checkMarks[3].scale = Vector2(0.1, 0.1)
+	

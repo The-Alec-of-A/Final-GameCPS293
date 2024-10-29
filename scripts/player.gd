@@ -4,10 +4,15 @@ extends CharacterBody2D
 @onready var boss_area: Area2D = %bossArea
 @onready var arrow_set: Sprite2D = $arrowSet
 @onready var punchDelay: Timer = $punchDelay
+@onready var texture_rect: TextureRect = $arrowSet/TextureRect
+@onready var multiDelay: Timer = $multiDelay
+@onready var arrowsPaused: Timer = $arrowSet/arrowsPaused
+@onready var killzone: Area2D = %killzone
 
 var inputSeq: Array[String] = ["", "", "", ""]
-var offsetFix = false
-var count: int = 0
+var playerOffset: int = 21
+var multi_isplaying: bool = false
+var count = 0
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -750.0
@@ -35,30 +40,43 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_released("jump") and velocity.y < -420:
 		velocity.y = JUMP_VELOCITY / 4
 	
+	
 	var direction = Input.get_axis("move_left", "move_right")
 		
-	if boss_area.entered == true and (Input.is_action_just_pressed( \
+	if killzone.died:
+		Input.action_release("move_left")
+		Input.action_release("move_right")
+		
+	if boss_area.entered and arrowsPaused.is_stopped() and (Input.is_action_just_pressed( \
 	"down_arrow") or Input.is_action_just_pressed("up_arrow") or \
 	Input.is_action_just_pressed("left_arrow") or Input \
 	.is_action_just_pressed("right_arrow")):
 		check_input()
-	# Get the input direction and handle the movement/deceleration.
+	# Get the input direction and handle the movement/ddeceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	
 	# flip the sprite
 	if direction > 0:
 		animated_sprite.flip_h = false
+
 	elif direction < 0:
 		animated_sprite.flip_h = true
-		
-	if Input.is_action_just_pressed("move_left") and offsetFix == false:
-		animated_sprite.position.x -= 21
-		offsetFix = true
-	if Input.is_action_just_pressed("move_right") and offsetFix == true:
-		animated_sprite.position.x += 21
-		offsetFix = false
+
+	if direction:
+		velocity.x = direction * SPEED
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+
+	move_and_slide()
 	
-	if punchDelay.is_stopped() == true:
+	if Input.is_action_just_pressed("move_left") and Input.is_action_just_released(\
+	"move_right"):
+		animated_sprite.position.x -= playerOffset
+	if Input.is_action_just_pressed("move_right") and Input.is_action_just_released(\
+	"move_right"):
+		animated_sprite.position.x += playerOffset
+	
+	if punchDelay.is_stopped() and multiDelay.is_stopped():
 		if is_on_floor():
 			if direction == 0:
 				animated_sprite.play("idle")
@@ -67,21 +85,14 @@ func _physics_process(delta: float) -> void:
 		else:
 			animated_sprite.play("jump_")
 	
-	if direction >= -1 and Input.is_action_just_pressed("punch") and \
-	 punchDelay.is_stopped() == true:
+	if Input.is_action_just_pressed("punch") and punchDelay.is_stopped():
 		punchDelay.start()
 		animated_sprite.play("punch_")
 	
-	if arrow_set.fullCharge == true and direction >= -1 and Input.\
-	is_action_just_pressed("multiAttack"):
-		animated_sprite.play("punch_")
-		
-	if direction:
-		velocity.x = direction * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-	
-	move_and_slide()
+	if arrow_set.fullCharge and Input.is_action_just_pressed("multiAttack"):
+		animated_sprite.play("multi_attack")
+		multiDelay.start()
+		arrow_set.fullCharge = false
 
 func check_input():
 	
@@ -94,12 +105,10 @@ func check_input():
 	else:
 		inputSeq[count] = "down_arrow"
 	
-	arrow_set.arrowCheck(inputSeq)
+	arrow_set.arrowCheck(inputSeq[count])
 	
-	if(inputSeq[count] == arrow_set.arrowKey[count]):
+	if inputSeq[count] == arrow_set.arrowKey[count]:
 		count += 1
-		if count == 4:
-			count = 0
-	
-	else:
+		
+	if count == 4 or inputSeq[count] != arrow_set.arrowKey[count] or texture_rect.visible == false:
 		count = 0
