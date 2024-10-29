@@ -1,6 +1,5 @@
-
-###Week of 10-27-24 (current week)-
-*multi-attack animation added and works when power bar is filled
+### Week of 10-27-24 (current week)-
+* multi-attack animation added and works when power bar is filled
 ### Week of 10-20-24- Arrow processes added
 * arrows disappear and reappear after a set amount of time
 * arrows regenerate multiple times now instead of just once
