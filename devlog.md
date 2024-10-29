@@ -1,7 +1,11 @@
 
-### Week of 10-20-24 (current week)- Arrow processes added
+###Week of 10-27-24 (current week)-
+*multi-attack animation added and works when power bar is filled
+### Week of 10-20-24- Arrow processes added
 * arrows disappear and reappear after a set amount of time
-* arrows regenrate multiple times now instead of just once
+* arrows regenerate multiple times now instead of just once
+* check marks added
+* character stops when both 'A' and 'D' are pressed to prevent movement glitch
 ### Week of 10-13-24- 7.5 hrs: More game components added and arrow mechanics closer to completion
 * used ChatGPT for some coding assistance
 * boss area added but not yet fully implemented
@@ -20,5 +24,3 @@
 * background added
 * added arrow sprite and made edited pngs for all directions
 * camera follows player
-
-
