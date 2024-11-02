@@ -4,12 +4,11 @@ extends CharacterBody2D
 @onready var boss_area: Area2D = %bossArea
 @onready var arrow_set: Sprite2D = $arrowSet
 @onready var punchDelay: Timer = $punchDelay
-@onready var texture_rect: TextureRect = $arrowSet/TextureRect
 @onready var multiDelay: Timer = $multiDelay
 @onready var arrowsPaused: Timer = $arrowSet/arrowsPaused
 @onready var killzone: Area2D = %killzone
 
-var inputSeq: Array[String] = ["", "", "", ""]
+var inputSeq: String
 var playerOffset: int = 21
 var multi_isplaying: bool = false
 var count = 0
@@ -52,8 +51,6 @@ func _physics_process(delta: float) -> void:
 	Input.is_action_just_pressed("left_arrow") or Input \
 	.is_action_just_pressed("right_arrow")):
 		check_input()
-	# Get the input direction and handle the movement/ddeceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
 	
 	# flip the sprite
 	if direction > 0:
@@ -93,22 +90,24 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.play("multi_attack")
 		multiDelay.start()
 		arrow_set.fullCharge = false
+		arrow_set.markersDisappear()
+		arrow_set.power_bar.value = 0
 
 func check_input():
 	
+	print(arrow_set.fullCharge)
 	if Input.is_action_just_pressed("right_arrow"):
-		inputSeq[count] = "right_arrow"
+		inputSeq = "rightArrow"
 	elif Input.is_action_just_pressed("left_arrow"):
-		inputSeq[count] = "left_arrow"
+		inputSeq = "leftArrow"
 	elif Input.is_action_just_pressed("up_arrow"):
-		inputSeq[count] = "up_arrow"
+		inputSeq = "upArrow"
 	else:
-		inputSeq[count] = "down_arrow"
+		inputSeq = "downArrow"
+
+	if arrowsPaused.is_stopped():
+		arrow_set.arrowCheck(inputSeq)
 	
-	arrow_set.arrowCheck(inputSeq[count])
-	
-	if inputSeq[count] == arrow_set.arrowKey[count]:
-		count += 1
-		
-	if count == 4 or inputSeq[count] != arrow_set.arrowKey[count] or texture_rect.visible == false:
-		count = 0
+func _on_multi_delay_timeout() -> void:
+	arrow_set.fullCharge = false
+	arrow_set.arrowsPaused.start()

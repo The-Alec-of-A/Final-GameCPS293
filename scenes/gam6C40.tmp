@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://b1s72ixnitmoh"]
+[gd_scene load_steps=17 format=4 uid="uid://b1s72ixnitmoh"]
 
 [ext_resource type="PackedScene" uid="uid://ihyjiciuailn" path="res://scenes/player.tscn" id="1_b5g17"]
 [ext_resource type="Texture2D" uid="uid://cw74o3rv80y07" path="res://assets/world/world_tileset.png" id="2_q04c5"]
@@ -11,6 +11,8 @@
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_eo8ys"]
 normal = Vector2(-1, 0)
+
+[sub_resource type="ImageTexture" id="ImageTexture_vo8ei"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6eu4c"]
 texture = ExtResource("2_q04c5")
@@ -567,6 +569,81 @@ unique_name_in_owner = true
 position = Vector2(427, -44)
 script = ExtResource("4_wavxp")
 
+[node name="TextureRect" type="TextureRect" parent="bossArea/Player/arrowSet"]
+z_index = 2
+anchors_preset = -1
+anchor_bottom = 10.691
+offset_left = -522.0
+offset_top = -137.0
+offset_right = -482.0
+offset_bottom = -107.691
+texture = SubResource("ImageTexture_vo8ei")
+expand_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="bossArea/Player/arrowSet"]
+z_index = 1
+anchors_preset = -1
+anchor_bottom = 10.691
+offset_left = -461.0
+offset_top = -137.0
+offset_right = -421.0
+offset_bottom = -107.0
+texture = SubResource("ImageTexture_vo8ei")
+expand_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="bossArea/Player/arrowSet"]
+visibility_layer = 2
+z_index = 1
+anchors_preset = -1
+anchor_bottom = 10.691
+offset_left = -522.0
+offset_top = -76.0
+offset_right = -482.0
+offset_bottom = -46.0
+texture = SubResource("ImageTexture_vo8ei")
+expand_mode = 2
+
+[node name="TextureRect4" type="TextureRect" parent="bossArea/Player/arrowSet"]
+visibility_layer = 2
+z_index = 1
+anchors_preset = -1
+anchor_bottom = 10.691
+offset_left = -461.0
+offset_top = -76.0
+offset_right = -421.0
+offset_bottom = -46.0
+texture = SubResource("ImageTexture_vo8ei")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="bossArea/Player/arrowSet"]
+z_index = 1
+offset_left = -480.0
+offset_top = -114.0
+offset_right = -451.0
+offset_bottom = -87.0
+
+[node name="Label2" type="Label" parent="bossArea/Player/arrowSet"]
+z_index = 1
+offset_left = -419.0
+offset_top = -114.0
+offset_right = -390.0
+offset_bottom = -87.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Label3" type="Label" parent="bossArea/Player/arrowSet"]
+z_index = 1
+offset_left = -480.0
+offset_top = -53.0
+offset_right = -451.0
+offset_bottom = -26.0
+
+[node name="Label4" type="Label" parent="bossArea/Player/arrowSet"]
+z_index = 1
+offset_left = -419.0
+offset_top = -53.0
+offset_right = -390.0
+offset_bottom = -26.0
+
 [node name="arrowsVisible" type="Timer" parent="bossArea/Player/arrowSet"]
 wait_time = 4.0
 one_shot = true
@@ -577,30 +654,6 @@ one_shot = true
 
 [node name="incorrectFlash" type="Timer" parent="bossArea/Player/arrowSet"]
 wait_time = 0.8
-
-[node name="Label" type="Label" parent="bossArea/Player/arrowSet"]
-offset_left = -482.0
-offset_top = -107.0
-offset_right = -452.0
-offset_bottom = -84.0
-
-[node name="Label2" type="Label" parent="bossArea/Player/arrowSet"]
-offset_left = -421.0
-offset_top = -107.0
-offset_right = -391.0
-offset_bottom = -84.0
-
-[node name="Label3" type="Label" parent="bossArea/Player/arrowSet"]
-offset_left = -482.0
-offset_top = -46.0
-offset_right = -452.0
-offset_bottom = -23.0
-
-[node name="Label4" type="Label" parent="bossArea/Player/arrowSet"]
-offset_left = -421.0
-offset_top = -46.0
-offset_right = -391.0
-offset_bottom = -23.0
 
 [node name="Ground" type="TileMapLayer" parent="."]
 position = Vector2(-21, 45)
@@ -626,7 +679,6 @@ shape = SubResource("WorldBoundaryShape2D_0bla7")
 layer = 2
 
 [node name="Power bar" type="TextureProgressBar" parent="CanvasLayer"]
-unique_name_in_owner = true
 z_index = 1
 anchors_preset = 2
 anchor_top = 1.0
