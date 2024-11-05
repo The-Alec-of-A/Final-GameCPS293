@@ -94,8 +94,6 @@ func _physics_process(delta: float) -> void:
 		arrow_set.power_bar.value = 0
 
 func check_input():
-	
-	print(arrow_set.fullCharge)
 	if Input.is_action_just_pressed("right_arrow"):
 		inputSeq = "rightArrow"
 	elif Input.is_action_just_pressed("left_arrow"):
@@ -104,7 +102,7 @@ func check_input():
 		inputSeq = "upArrow"
 	else:
 		inputSeq = "downArrow"
-
+		
 	if arrowsPaused.is_stopped():
 		arrow_set.arrowCheck(inputSeq)
 	

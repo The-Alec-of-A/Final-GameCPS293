@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwh7s18tv23ar"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_7std3"]
+
+[sub_resource type="GDScript" id="GDScript_e5644"]
+script/source = "extends Sprite2D
+@onready var arrow_set: Sprite2D = %arrowSet
+
+var arrowRect = TextureRect
+@onready var checkmark: TextureRect = $checkmark1
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+
+func update_sequence():
+	
+	arrowRect = arrow_set.arrowRect[0].duplicate()
+	var rndIndex = randi() % arrow_set.nums.size()
+	texture = load(arrow_set.images[rndIndex])
+	arrow_set.arrowOrder[0] = arrow_set.arrowPoint[rndIndex]
+
+func arrowCheck(userInput: int):
+	if userInput == arrow_set.arrowOrder[0]:
+		arrow_set.correctCount += 1
+		checkmark.visible = true
+		
+	else:
+		arrow_set.arrowsVisible.stop()
+		arrow_set.markersDisappear()
+		arrow_set.arrowsPaused.start()
+"
+
+[node name="arrow1" type="Sprite2D"]
+position = Vector2(-387, 68)
+scale = Vector2(218, 218)
+texture = SubResource("ImageTexture_7std3")
+script = SubResource("GDScript_e5644")

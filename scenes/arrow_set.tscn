@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://c442mbbeujhsx"]
+[gd_scene load_steps=3 format=3 uid="uid://c442mbbeujhsx"]
 
 [ext_resource type="Script" path="res://scripts/arrow_set.gd" id="1_fvgxl"]
 
-[node name="Sprite2D" type="Sprite2D"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_rt3ed"]
+
+[node name="arrow1" type="Sprite2D"]
+scale = Vector2(-218, 218)
+texture = SubResource("CompressedTexture2D_rt3ed")
 script = ExtResource("1_fvgxl")
