@@ -1,5 +1,5 @@
 ### Week of 11-3-24- 4.5 hrs: mechanic finished
-*THE MECHANIC IS DONE! (am 99% certain it can't fail)
+* THE MECHANIC IS DONE! (am 99% certain it can't fail)
 ### Week of 10-27-24- 3.5 hrs: animation additions
 * multi-attack animation added and works when power bar is filled
 ### Week of 10-20-24 4.5 hrs: Arrow processes added
