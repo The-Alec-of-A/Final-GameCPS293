@@ -8,12 +8,12 @@ var images: Array = ["res://assets/other/arrow down.png",
 var nums = ["1", "2", "3", "4"]
 var arrowPoint: Array[String] = ["downArrow", "upArrow", "leftArrow", "rightArrow"]
 var arrowOrder: Array[String] = ["", "", "", ""]
-var index: int = 0
 var correctCount: int = 0
 var powerCharge: int = 0
-var fullCharge = false
+var fullCharge: bool = false
 var checkMarks: Array[Sprite2D] = []
 var arrow2D: Array[Sprite2D] = []
+var labelSet: Array[Label] = []
 
 @onready var label1: Label = $Label
 @onready var label2: Label = $Label2
@@ -42,31 +42,25 @@ func _ready() -> void:
 			checkMarks[i].visible = false
 			checkMarks[i].z_index = 2
 			
+			var arrowLabel = Label.new()
+			add_child(arrowLabel)
+			labelSet.append(arrowLabel)
+			
 		markFormat()
-		
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 
 func update_image():
 	
 	nums.shuffle()
-	labelStorage()
+	print(nums)
 	
 	for i in range(arrow2D.size()):
 		var rndIndex = rng.randi_range(0, arrowPoint.size() - 1)
 		arrow2D[int(nums[i])-1].texture = load(images[rndIndex])
+		labelSet[int(nums[i])-1].text = str(i+1)
 		arrowOrder[i] = arrowPoint[rndIndex]
 	
-	print(arrowOrder)
 	markersAppear()
 	arrowsVisible.start()
-
-func labelStorage():
-	label1.text = nums[0]
-	label2.text = nums[1]
-	label3.text = nums[2]
-	label4.text = nums[3]
 
 func arrowCheck(userInput: String):
 	
@@ -94,6 +88,7 @@ func _on_arrows_visible_timeout() -> void:
 	arrowsPaused.start()
 
 func _on_arrows_paused_timeout() -> void:
+	
 	if boss_area and !fullCharge:
 		update_image()
 		markersAppear()
@@ -104,6 +99,11 @@ func markFormat():
 	arrow2D[1].position = Vector2(-443, -115)
 	arrow2D[2].position = Vector2(-504, -54)
 	arrow2D[3].position = Vector2(-443, -54)
+	
+	labelSet[0].position = label1.position
+	labelSet[1].position = label2.position
+	labelSet[2].position = label3.position
+	labelSet[3].position = label4.position
 	
 	for i in range(arrow2D.size()):
 		arrow2D[i].texture = CompressedTexture2D.new()
@@ -116,21 +116,13 @@ func markFormat():
 func markersAppear():
 	for i in range(arrow2D.size()):
 		arrow2D[i].visible = true
-		
-	label1.visible = true
-	label2.visible = true
-	label3.visible = true
-	label4.visible = true
+		labelSet[i].visible = true
 
 func markersDisappear():
 	for i in range(arrow2D.size()):
 		arrow2D[i].visible = false
 		checkMarks[i].visible = false
 		arrow2D[i].texture = null
-	
-	label1.visible = false
-	label2.visible = false
-	label3.visible = false
-	label4.visible = false
+		labelSet[i].visible = false
 	
 	correctCount = 0

@@ -1,6 +1,8 @@
-### Week of 10-27-24 (current week)-
+### Week of 11-3-24- 4.5 hrs: mechanic finished
+*THE MECHANIC IS DONE! (am 99% certain it can't fail)
+### Week of 10-27-24- 3.5 hrs: animation additions
 * multi-attack animation added and works when power bar is filled
-### Week of 10-20-24- Arrow processes added
+### Week of 10-20-24 4.5 hrs: Arrow processes added
 * arrows disappear and reappear after a set amount of time
 * arrows regenerate multiple times now instead of just once
 * check marks added

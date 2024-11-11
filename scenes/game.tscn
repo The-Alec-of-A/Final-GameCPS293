@@ -568,10 +568,12 @@ position = Vector2(427, -44)
 script = ExtResource("4_wavxp")
 
 [node name="arrowsVisible" type="Timer" parent="bossArea/Player/arrowSet"]
+process_callback = 0
 wait_time = 4.0
 one_shot = true
 
 [node name="arrowsPaused" type="Timer" parent="bossArea/Player/arrowSet"]
+process_callback = 0
 wait_time = 3.0
 one_shot = true
 
@@ -579,24 +581,28 @@ one_shot = true
 wait_time = 0.8
 
 [node name="Label" type="Label" parent="bossArea/Player/arrowSet"]
+visible = false
 offset_left = -482.0
 offset_top = -107.0
 offset_right = -452.0
 offset_bottom = -84.0
 
 [node name="Label2" type="Label" parent="bossArea/Player/arrowSet"]
+visible = false
 offset_left = -421.0
 offset_top = -107.0
 offset_right = -391.0
 offset_bottom = -84.0
 
 [node name="Label3" type="Label" parent="bossArea/Player/arrowSet"]
+visible = false
 offset_left = -482.0
 offset_top = -46.0
 offset_right = -452.0
 offset_bottom = -23.0
 
 [node name="Label4" type="Label" parent="bossArea/Player/arrowSet"]
+visible = false
 offset_left = -421.0
 offset_top = -46.0
 offset_right = -391.0

@@ -19,7 +19,7 @@ const GRAVITY = 2200.0
 const FALL_GRAVITY = 2400.0
 
 func _ready() -> void:
-	arrow_set = get_node("arrowSet")
+	pass
 
 func gravity(velocity: Vector2):
 	if velocity.y < 0:
@@ -102,7 +102,8 @@ func check_input():
 		inputSeq = "upArrow"
 	else:
 		inputSeq = "downArrow"
-		
+	
+	print(inputSeq)
 	if arrowsPaused.is_stopped():
 		arrow_set.arrowCheck(inputSeq)
 	
