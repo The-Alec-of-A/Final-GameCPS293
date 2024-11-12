@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://b1s72ixnitmoh"]
+[gd_scene load_steps=19 format=4 uid="uid://b1s72ixnitmoh"]
 
 [ext_resource type="PackedScene" uid="uid://ihyjiciuailn" path="res://scenes/player.tscn" id="1_b5g17"]
 [ext_resource type="Texture2D" uid="uid://cw74o3rv80y07" path="res://assets/world/world_tileset.png" id="2_q04c5"]
@@ -8,6 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://bploddf236cb5" path="res://assets/other/progress bar empty.png" id="5_4ts0k"]
 [ext_resource type="PackedScene" uid="uid://c50o5aeyd8ohx" path="res://scenes/bossArea.tscn" id="5_rpf0s"]
 [ext_resource type="PackedScene" uid="uid://d1f5s7o7cdcyx" path="res://scenes/killzone.tscn" id="7_dorf2"]
+[ext_resource type="Texture2D" uid="uid://beiko8ml5ptke" path="res://assets/other/health bar start.png" id="9_nl01o"]
+[ext_resource type="Texture2D" uid="uid://dddxew2a4wb1h" path="res://assets/other/health bar end.png" id="10_ssx1u"]
+[ext_resource type="Texture2D" uid="uid://cfdfxdl72y0gs" path="res://assets/player/borris icon.png" id="11_tkr4r"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_eo8ys"]
 normal = Vector2(-1, 0)
@@ -660,7 +663,7 @@ scale = Vector2(0.687464, 0.705181)
 texture_under = ExtResource("5_4ts0k")
 texture_progress = ExtResource("4_2nhhy")
 
-[node name="Label" type="Label" parent="CanvasLayer/Power bar"]
+[node name="Pbar label" type="Label" parent="CanvasLayer/Power bar"]
 layout_mode = 0
 offset_left = -40.7294
 offset_top = 2.83615
@@ -668,6 +671,23 @@ offset_right = -0.729404
 offset_bottom = 36.8362
 text = "P:"
 label_settings = SubResource("LabelSettings_lfn2u")
+
+[node name="health bar" type="TextureProgressBar" parent="CanvasLayer"]
+offset_left = 13.0
+offset_top = 31.0
+offset_right = 303.0
+offset_bottom = 67.0
+scale = Vector2(0.742691, 0.629508)
+texture_under = ExtResource("9_nl01o")
+texture_progress = ExtResource("10_ssx1u")
+
+[node name="playerIcon" type="TextureRect" parent="CanvasLayer/health bar"]
+layout_mode = 0
+offset_left = 4.03936
+offset_top = -46.0677
+offset_right = 44.0394
+offset_bottom = -6.06768
+texture = ExtResource("11_tkr4r")
 
 [connection signal="timeout" from="bossArea/Player/arrowSet/arrowsVisible" to="bossArea/Player/arrowSet" method="_on_arrows_visible_timeout"]
 [connection signal="timeout" from="bossArea/Player/arrowSet/arrowsPaused" to="bossArea/Player/arrowSet" method="_on_arrows_paused_timeout"]

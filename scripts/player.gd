@@ -7,11 +7,14 @@ extends CharacterBody2D
 @onready var multiDelay: Timer = $multiDelay
 @onready var arrowsPaused: Timer = $arrowSet/arrowsPaused
 @onready var killzone: Area2D = %killzone
+@onready var player: CharacterBody2D = %Player
 
 var inputSeq: String
 var playerOffset: int = 21
 var multi_isplaying: bool = false
 var count = 0
+var leftFlipped: bool = false
+var rightFlipped: bool = false
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -750.0
@@ -53,11 +56,19 @@ func _physics_process(delta: float) -> void:
 		check_input()
 	
 	# flip the sprite
-	if direction > 0:
+	if Input.is_action_just_pressed("move_right"):
 		animated_sprite.flip_h = false
-
-	elif direction < 0:
+		rightFlipped = true
+		if(leftFlipped):
+			player.position.x += playerOffset
+			leftFlipped = false
+		
+	elif Input.is_action_just_pressed("move_left"):
 		animated_sprite.flip_h = true
+		leftFlipped = true
+		if(rightFlipped):
+			player.position.x -= playerOffset
+			rightFlipped = false
 
 	if direction:
 		velocity.x = direction * SPEED
@@ -68,10 +79,10 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("move_left") and Input.is_action_just_released(\
 	"move_right"):
-		animated_sprite.position.x -= playerOffset
+		player.position.x -= playerOffset
 	if Input.is_action_just_pressed("move_right") and Input.is_action_just_released(\
 	"move_right"):
-		animated_sprite.position.x += playerOffset
+		player.position.x += playerOffset
 	
 	if punchDelay.is_stopped() and multiDelay.is_stopped():
 		if is_on_floor():
@@ -103,7 +114,6 @@ func check_input():
 	else:
 		inputSeq = "downArrow"
 	
-	print(inputSeq)
 	if arrowsPaused.is_stopped():
 		arrow_set.arrowCheck(inputSeq)
 	

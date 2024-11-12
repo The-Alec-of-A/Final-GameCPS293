@@ -51,7 +51,6 @@ func _ready() -> void:
 func update_image():
 	
 	nums.shuffle()
-	print(nums)
 	
 	for i in range(arrow2D.size()):
 		var rndIndex = rng.randi_range(0, arrowPoint.size() - 1)
