@@ -550,7 +550,7 @@ unique_name_in_owner = true
 position = Vector2(728, -120)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bossArea"]
-position = Vector2(83, -114)
+position = Vector2(0, -106)
 shape = SubResource("WorldBoundaryShape2D_eo8ys")
 
 [node name="Player" parent="bossArea" instance=ExtResource("1_b5g17")]
