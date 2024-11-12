@@ -7,7 +7,6 @@ extends CharacterBody2D
 @onready var multiDelay: Timer = $multiDelay
 @onready var arrowsPaused: Timer = $arrowSet/arrowsPaused
 @onready var killzone: Area2D = %killzone
-@onready var player: CharacterBody2D = %Player
 
 var inputSeq: String
 var playerOffset: int = 21
@@ -60,14 +59,14 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.flip_h = false
 		rightFlipped = true
 		if(leftFlipped):
-			player.position.x += playerOffset
+			animated_sprite.position.x += playerOffset
 			leftFlipped = false
 		
 	elif Input.is_action_just_pressed("move_left"):
 		animated_sprite.flip_h = true
 		leftFlipped = true
 		if(rightFlipped):
-			player.position.x -= playerOffset
+			animated_sprite.position.x -= playerOffset
 			rightFlipped = false
 
 	if direction:
@@ -79,10 +78,10 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("move_left") and Input.is_action_just_released(\
 	"move_right"):
-		player.position.x -= playerOffset
+		animated_sprite.position.x -= playerOffset
 	if Input.is_action_just_pressed("move_right") and Input.is_action_just_released(\
 	"move_right"):
-		player.position.x += playerOffset
+		animated_sprite.position.x += playerOffset
 	
 	if punchDelay.is_stopped() and multiDelay.is_stopped():
 		if is_on_floor():
