@@ -9,6 +9,7 @@ var nums = ["1", "2", "3", "4"]
 var arrowPoint: Array[String] = ["downArrow", "upArrow", "leftArrow", "rightArrow"]
 var arrowOrder: Array[String] = ["", "", "", ""]
 var correctCount: int = 0
+var index: int = 0
 var powerCharge: int = 0
 var fullCharge: bool = false
 var checkMarks: Array[Sprite2D] = []
@@ -24,6 +25,8 @@ var labelSet: Array[Label] = []
 @onready var arrowsVisible: Timer = $arrowsVisible
 @onready var arrowsPaused: Timer = $arrowsPaused
 @onready var power_bar: TextureProgressBar = %"Power bar"
+@onready var xMark: TextureRect = $"X-mark"
+@onready var incorrectFlash: Timer = $incorrectFlash
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -63,14 +66,16 @@ func update_image():
 
 func arrowCheck(userInput: String):
 	
-	if userInput == arrowOrder[correctCount]:
-		correctCount += 1
-		checkMarks[int(nums[correctCount-1])-1].visible = true
+	if(incorrectFlash.is_stopped()):
+		if userInput == arrowOrder[correctCount] :
+			correctCount += 1
+			checkMarks[int(nums[correctCount-1])-1].visible = true
 	
-	else:
-		arrowsVisible.stop()
-		markersDisappear()
-		arrowsPaused.start()
+		else:
+			incorrectFlash.start()
+			xMark.position = Vector2(arrow2D[int(nums[correctCount])-1].position.x - 21, arrow2D[\
+			int(nums[correctCount])-1].position.y - 18)
+			xMark.visible = true
 	
 	if correctCount == 4:
 		powerCharge += 1
@@ -83,8 +88,9 @@ func arrowCheck(userInput: String):
 
 func _on_arrows_visible_timeout() -> void:
 	
-	markersDisappear()
-	arrowsPaused.start()
+	if(incorrectFlash.is_stopped()):
+		markersDisappear()
+		arrowsPaused.start()
 
 func _on_arrows_paused_timeout() -> void:
 	
@@ -104,9 +110,13 @@ func markFormat():
 	labelSet[2].position = label3.position
 	labelSet[3].position = label4.position
 	
+	xMark.z_index = 2
+	
 	for i in range(arrow2D.size()):
 		arrow2D[i].texture = CompressedTexture2D.new()
 		arrow2D[i].scale = Vector2(0.07, 0.07)
+		arrow2D[i].z_index = 1
+		labelSet[i].z_index = 1
 
 		checkMarks[i].position = Vector2(arrow2D[i].position.x, \
 		arrow2D[i].position.y)
@@ -125,3 +135,10 @@ func markersDisappear():
 		labelSet[i].visible = false
 	
 	correctCount = 0
+	arrowsPaused.start()
+
+func _on_incorrect_flash_timeout() -> void:
+	
+	arrowsVisible.stop()
+	xMark.visible = false
+	markersDisappear()

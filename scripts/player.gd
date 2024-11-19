@@ -9,14 +9,15 @@ extends CharacterBody2D
 @onready var killzone: Area2D = %killzone
 
 var inputSeq: String
-var playerOffset: int = 21
+var playerOffset: int = 28
 var multi_isplaying: bool = false
 var count = 0
 var leftFlipped: bool = false
-var rightFlipped: bool = false
+var rightFlipped: bool = true
+var canDoubleJump = true
 
 const SPEED = 300.0
-const JUMP_VELOCITY = -750.0
+const JUMP_VELOCITY = -700.0
 const GRAVITY = 2200.0
 const FALL_GRAVITY = 2400.0
 
@@ -33,14 +34,20 @@ func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity(velocity) * delta
-
+	
 	# Handle jump.
+	if is_on_floor():
+		canDoubleJump = true
+
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 	
 	if Input.is_action_just_released("jump") and velocity.y < -420:
 		velocity.y = JUMP_VELOCITY / 4
-	
+			
+	if !is_on_floor() and canDoubleJump and Input.is_action_just_pressed("jump"):
+		velocity.y = JUMP_VELOCITY
+		canDoubleJump = false
 	
 	var direction = Input.get_axis("move_left", "move_right")
 		
@@ -55,14 +62,14 @@ func _physics_process(delta: float) -> void:
 		check_input()
 	
 	# flip the sprite
-	if Input.is_action_just_pressed("move_right"):
+	if Input.is_action_pressed("move_right") and !Input.is_action_pressed("move_left"):
 		animated_sprite.flip_h = false
 		rightFlipped = true
 		if(leftFlipped):
 			animated_sprite.position.x += playerOffset
 			leftFlipped = false
 		
-	elif Input.is_action_just_pressed("move_left"):
+	elif Input.is_action_pressed("move_left") and !Input.is_action_pressed("move_right"):
 		animated_sprite.flip_h = true
 		leftFlipped = true
 		if(rightFlipped):
@@ -75,13 +82,6 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
-	
-	if Input.is_action_just_pressed("move_left") and Input.is_action_just_released(\
-	"move_right"):
-		animated_sprite.position.x -= playerOffset
-	if Input.is_action_just_pressed("move_right") and Input.is_action_just_released(\
-	"move_right"):
-		animated_sprite.position.x += playerOffset
 	
 	if punchDelay.is_stopped() and multiDelay.is_stopped():
 		if is_on_floor():
