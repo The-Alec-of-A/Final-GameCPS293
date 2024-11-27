@@ -1,5 +1,12 @@
+### Week of 11-24-24 (current week)
+* added music
+### Week of 11-17-24- 5 hrs: More animations and attempted enemy combat
+* added enemy sprite animations. attempted to get the player to punch the enemy, but having issues implementing that
+### Week of 11-10-24- 5 hrs: polishing and extra features added
+* added double jumping ability
+* expanded background design
 ### Week of 11-3-24- 4.5 hrs: mechanic finished
-* THE MECHANIC IS DONE! (am 99% certain it can't fail)
+* THE MECHANIC IS DONE!
 ### Week of 10-27-24- 3.5 hrs: animation additions
 * multi-attack animation added and works when power bar is filled
 ### Week of 10-20-24 4.5 hrs: Arrow processes added

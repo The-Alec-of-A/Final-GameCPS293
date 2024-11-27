@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxcsaiih7took"]
+
+[ext_resource type="AudioStream" uid="uid://s3gu7imnpa" path="res://assets/music/54 - Wilderness.mp3" id="1_dljqa"]
+
+[node name="Music" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_dljqa")
+autoplay = true

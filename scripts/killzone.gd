@@ -6,7 +6,7 @@ extends Area2D
 
 var died: bool
 
-func _on_body_entered(body):
+func _on_body_entered(body: Node2D):
 	died = true
 	arrow_set.correctCount = 0
 	player.count = 0
@@ -15,3 +15,4 @@ func _on_body_entered(body):
 func _on_timer_timeout() -> void:
 	get_tree().reload_current_scene()
 	died = false
+	
