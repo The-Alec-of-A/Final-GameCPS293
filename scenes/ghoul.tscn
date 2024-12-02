@@ -1,8 +1,17 @@
-[gd_scene load_steps=24 format=3 uid="uid://bdxjng5ewgq51"]
+[gd_scene load_steps=51 format=3 uid="uid://bdxjng5ewgq51"]
 
 [ext_resource type="Texture2D" uid="uid://dmj2mb81jmp8s" path="res://assets/enemy/Cultist Enemy Pack/SpriteSheet/Cultist_Sheet.png" id="1_jb566"]
 [ext_resource type="Script" path="res://scripts/ghoul.gd" id="1_x85tl"]
 [ext_resource type="Texture2D" uid="uid://blgbo2rr3o2qh" path="res://assets/enemy/Cultist Enemy Pack/SpriteSheet/Cultist_NoEffect_Sheet.png" id="2_a8q26"]
+[ext_resource type="AudioStream" uid="uid://wipf7g1oxtgj" path="res://assets/sound/punch1.wav" id="4_t1qrc"]
+[ext_resource type="Texture2D" uid="uid://088cl033qe5l" path="res://assets/enemy/Cultist Enemy Pack/Individual Sprite/Cultist/Walk/Cultist-Attack_Walk_1.png" id="4_tru3c"]
+[ext_resource type="Texture2D" uid="uid://df3gunvjf23ae" path="res://assets/enemy/Cultist Enemy Pack/Individual Sprite/Cultist/Walk/Cultist-Attack_Walk_2.png" id="5_yallq"]
+[ext_resource type="Texture2D" uid="uid://u8ylgwn4gkc" path="res://assets/enemy/Cultist Enemy Pack/Individual Sprite/Cultist/Walk/Cultist-Attack_Walk_3.png" id="6_j17g6"]
+[ext_resource type="Texture2D" uid="uid://bxh6s7vqpgk5e" path="res://assets/enemy/Cultist Enemy Pack/Individual Sprite/Cultist/Walk/Cultist-Attack_Walk_4.png" id="7_t5pt6"]
+[ext_resource type="Texture2D" uid="uid://d2fgjo1kdowte" path="res://assets/enemy/Cultist Enemy Pack/Individual Sprite/Cultist/Walk/Cultist-Attack_Walk_5.png" id="8_iots4"]
+[ext_resource type="Texture2D" uid="uid://ch5tgpeh3eai" path="res://assets/enemy/Cultist Enemy Pack/Individual Sprite/Cultist/Walk/Cultist-Attack_Walk_6.png" id="9_xo4lo"]
+[ext_resource type="Texture2D" uid="uid://cceme5latit3e" path="res://assets/enemy/Cultist Enemy Pack/Individual Sprite/Cultist/Walk/Cultist-Attack_Walk_7.png" id="10_j07ql"]
+[ext_resource type="Texture2D" uid="uid://bivl42hy1pj7m" path="res://assets/enemy/Cultist Enemy Pack/Individual Sprite/Cultist/Walk/Cultist-Attack_Walk_8.png" id="11_gsqcq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5asnf"]
 atlas = ExtResource("2_a8q26")
@@ -35,6 +44,46 @@ region = Rect2(45, 378, 45, 42)
 [sub_resource type="AtlasTexture" id="AtlasTexture_3hhqf"]
 atlas = ExtResource("2_a8q26")
 region = Rect2(90, 378, 45, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0cdg7"]
+atlas = ExtResource("1_jb566")
+region = Rect2(180, 84, 45, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yrpu8"]
+atlas = ExtResource("1_jb566")
+region = Rect2(0, 126, 45, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bdi1f"]
+atlas = ExtResource("1_jb566")
+region = Rect2(45, 126, 45, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_43j4d"]
+atlas = ExtResource("1_jb566")
+region = Rect2(90, 126, 45, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s7qoq"]
+atlas = ExtResource("1_jb566")
+region = Rect2(135, 126, 45, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qnbrc"]
+atlas = ExtResource("1_jb566")
+region = Rect2(180, 126, 45, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0y04o"]
+atlas = ExtResource("1_jb566")
+region = Rect2(0, 168, 45, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nsd8h"]
+atlas = ExtResource("1_jb566")
+region = Rect2(45, 168, 45, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ejhe"]
+atlas = ExtResource("1_jb566")
+region = Rect2(90, 168, 45, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_05ddv"]
+atlas = ExtResource("1_jb566")
+region = Rect2(135, 168, 45, 42)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uwmho"]
 atlas = ExtResource("1_jb566")
@@ -72,6 +121,38 @@ region = Rect2(135, 0, 45, 42)
 atlas = ExtResource("1_jb566")
 region = Rect2(180, 0, 45, 42)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_6nujt"]
+atlas = ExtResource("4_tru3c")
+region = Rect2(0, 0, 45, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_botlb"]
+atlas = ExtResource("5_yallq")
+region = Rect2(0, 0, 45, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1s7y5"]
+atlas = ExtResource("6_j17g6")
+region = Rect2(0, 0, 45, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_to5u5"]
+atlas = ExtResource("7_t5pt6")
+region = Rect2(0, 0, 45, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n30mr"]
+atlas = ExtResource("8_iots4")
+region = Rect2(0, 0, 45, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_esbnr"]
+atlas = ExtResource("9_xo4lo")
+region = Rect2(0, 0, 45, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lqahn"]
+atlas = ExtResource("10_j07ql")
+region = Rect2(0, 0, 45, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rm3w1"]
+atlas = ExtResource("11_gsqcq")
+region = Rect2(0, 0, 45, 42)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_6begb"]
 animations = [{
 "frames": [{
@@ -101,6 +182,41 @@ animations = [{
 }],
 "loop": true,
 "name": &"die",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0cdg7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yrpu8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bdi1f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_43j4d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s7qoq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qnbrc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0y04o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nsd8h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ejhe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_05ddv")
+}],
+"loop": true,
+"name": &"fire_attack",
 "speed": 10.0
 }, {
 "frames": [{
@@ -139,13 +255,43 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6nujt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_botlb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1s7y5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_to5u5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n30mr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_esbnr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lqahn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rm3w1")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w1fli"]
-height = 34.0
+radius = 15.0
+height = 36.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h4sar"]
-radius = 12.0
+radius = 16.0
 height = 34.0
 
 [node name="Ghoul" type="CharacterBody2D"]
@@ -153,21 +299,41 @@ script = ExtResource("1_x85tl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_6begb")
-animation = &"die"
+animation = &"hit"
 autoplay = "idle"
-frame_progress = 0.171824
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(4, 4)
+position = Vector2(2, 3)
 shape = SubResource("CapsuleShape2D_w1fli")
 
 [node name="enemyBounds" type="Area2D" parent="."]
 
-[node name="enemy hitbox" type="CollisionShape2D" parent="enemyBounds"]
-position = Vector2(4, 4)
+[node name="enemy_hitbox" type="CollisionShape2D" parent="enemyBounds"]
+position = Vector2(2, 4)
 shape = SubResource("CapsuleShape2D_h4sar")
 
-[node name="damageable" type="Node" parent="."]
+[node name="DirectionTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="disappearDelay" type="Timer" parent="."]
+wait_time = 0.9
+
+[node name="hurtTime" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="punched" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_t1qrc")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+
+[node name="followPlayer" type="Timer" parent="."]
+autostart = true
 
 [connection signal="ready" from="." to="." method="_on_ready"]
-[connection signal="area_entered" from="enemyBounds" to="." method="_on_enemy_hitbox_area_entered"]
+[connection signal="area_entered" from="enemyBounds" to="." method="_on_enemy_bounds_area_entered"]
+[connection signal="area_exited" from="enemyBounds" to="." method="_on_enemy_bounds_area_exited"]
+[connection signal="timeout" from="DirectionTimer" to="." method="_on_direction_timer_timeout"]
+[connection signal="timeout" from="disappearDelay" to="." method="_on_disappear_delay_timeout"]
+[connection signal="timeout" from="followPlayer" to="." method="_on_follow_player_timeout"]

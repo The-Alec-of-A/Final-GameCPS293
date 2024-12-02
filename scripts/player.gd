@@ -10,6 +10,7 @@ extends CharacterBody2D
 @onready var ghoul: CharacterBody2D = %Ghoul
 @onready var dealDamageZone = $attack_move
 @onready var attack_hitbox: CollisionShape2D = $attack_move/attack_hitbox
+@onready var playerBody: CollisionShape2D = $CollisionShape2D
 
 var inputSeq: String
 var playerOffset: int = 28
@@ -17,7 +18,8 @@ var multi_isplaying: bool = false
 var count = 0
 var leftFlipped: bool = false
 var rightFlipped: bool = true
-var attack_type
+var attack_type: String
+var attackCollision
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -700.0
@@ -25,6 +27,7 @@ const GRAVITY = 2200.0
 const FALL_GRAVITY = 2400.0
 
 func _ready() -> void:
+	Global.playerBody = self
 	attack_hitbox.disabled = true
 
 func gravity(velocity: Vector2):
@@ -33,13 +36,13 @@ func gravity(velocity: Vector2):
 	return FALL_GRAVITY
 
 func _physics_process(delta: float) -> void:
+	Global.playerDamageZone = dealDamageZone
 
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity(velocity) * delta
 	
 	# Handle jump.
-
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 	
@@ -92,28 +95,42 @@ func _physics_process(delta: float) -> void:
 				animated_sprite.play("run")
 		else:
 			animated_sprite.play("jump_")
-	
+		
 	if Input.is_action_just_pressed("punch") and punchDelay.is_stopped():
 		punchDelay.start()
 		animated_sprite.play("punch_")
-		attack_type = "punch_"
-		
+		attack_type = "punch"
+		toggle_damage_collision()
 		set_damage()
-		
+				
 	if arrow_set.fullCharge and Input.is_action_just_pressed("multiAttack"):
 		animated_sprite.play("multi_attack")
 		multiDelay.start()
 		arrow_set.fullCharge = false
 		arrow_set.markersDisappear()
 		arrow_set.power_bar.value = 0
+		attack_type = "multi"
+		toggle_damage_collision()
+		set_damage()
+		
+	if self.playerBody == Global.enemyBody:
+		animated_sprite.play("hit")
+		
+func toggle_damage_collision():
+	attackCollision = dealDamageZone.get_node("attack_hitbox")
+	attackCollision.disabled = false
 
 func set_damage():
 	var damage_to_deal: int
 		
-	if attack_type == "punch_":
+	if attack_type == "punch":
 		damage_to_deal = 1
 		
+	if attack_type == "multi":
+		damage_to_deal = 3
+		
 	Global.playerDamageAmount = damage_to_deal
+	Global.attackType = attack_type
 
 func check_input():
 	if Input.is_action_just_pressed("right_arrow"):
@@ -131,3 +148,6 @@ func check_input():
 func _on_multi_delay_timeout() -> void:
 	arrow_set.fullCharge = false
 	arrow_set.arrowsPaused.start()
+
+func _on_punch_delay_timeout() -> void:
+	attackCollision.disabled = true

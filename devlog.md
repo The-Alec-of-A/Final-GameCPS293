@@ -1,5 +1,9 @@
-### Week of 11-24-24 (current week)
+### Week of 12-01-24
+* enemy walking and dying animations added
+### Week of 11-24-24- 4.5 hrs: Added features
 * added music
+* added punch sound
+* enemy is now damageable
 ### Week of 11-17-24- 5 hrs: More animations and attempted enemy combat
 * added enemy sprite animations. attempted to get the player to punch the enemy, but having issues implementing that
 ### Week of 11-10-24- 5 hrs: polishing and extra features added

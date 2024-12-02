@@ -5,7 +5,9 @@ var playerBody: CharacterBody2D
 var playerAlive: bool
 var playerDamageZone: Area2D
 var playerDamageAmount: int
-#var punchInRange: bool
 
+var enemyBody: CharacterBody2D
 var enemyDamageZone: Area2D
 var enemyDamageAmount: int
+
+var attackType: String
