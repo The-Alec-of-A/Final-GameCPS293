@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://bdxjng5ewgq51"]
+[gd_scene load_steps=57 format=3 uid="uid://bdxjng5ewgq51"]
 
 [ext_resource type="Texture2D" uid="uid://dmj2mb81jmp8s" path="res://assets/enemy/Cultist Enemy Pack/SpriteSheet/Cultist_Sheet.png" id="1_jb566"]
 [ext_resource type="Script" path="res://scripts/ghoul.gd" id="1_x85tl"]
@@ -12,6 +12,22 @@
 [ext_resource type="Texture2D" uid="uid://ch5tgpeh3eai" path="res://assets/enemy/Cultist Enemy Pack/Individual Sprite/Cultist/Walk/Cultist-Attack_Walk_6.png" id="9_xo4lo"]
 [ext_resource type="Texture2D" uid="uid://cceme5latit3e" path="res://assets/enemy/Cultist Enemy Pack/Individual Sprite/Cultist/Walk/Cultist-Attack_Walk_7.png" id="10_j07ql"]
 [ext_resource type="Texture2D" uid="uid://bivl42hy1pj7m" path="res://assets/enemy/Cultist Enemy Pack/Individual Sprite/Cultist/Walk/Cultist-Attack_Walk_8.png" id="11_gsqcq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4u4jy"]
+atlas = ExtResource("1_jb566")
+region = Rect2(45, 294, 45, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_em0m8"]
+atlas = ExtResource("1_jb566")
+region = Rect2(90, 294, 45, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_71uq3"]
+atlas = ExtResource("1_jb566")
+region = Rect2(135, 294, 45, 42)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nfkyj"]
+atlas = ExtResource("1_jb566")
+region = Rect2(180, 294, 45, 42)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5asnf"]
 atlas = ExtResource("2_a8q26")
@@ -157,6 +173,18 @@ region = Rect2(0, 0, 45, 42)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_4u4jy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_em0m8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_71uq3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nfkyj")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_5asnf")
 }, {
 "duration": 1.0,
@@ -287,32 +315,48 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w1fli"]
-radius = 15.0
 height = 36.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_h4sar"]
-radius = 16.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_m146o"]
+radius = 14.0
 height = 34.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_flmbi"]
+height = 36.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rp057"]
+size = Vector2(11, 16)
 
 [node name="Ghoul" type="CharacterBody2D"]
 script = ExtResource("1_x85tl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_6begb")
-animation = &"hit"
+animation = &"walk"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2, 3)
+position = Vector2(4, 3)
 shape = SubResource("CapsuleShape2D_w1fli")
 
 [node name="enemyBounds" type="Area2D" parent="."]
+visible = false
+collision_layer = 2
 
 [node name="enemy_hitbox" type="CollisionShape2D" parent="enemyBounds"]
-position = Vector2(2, 4)
-shape = SubResource("CapsuleShape2D_h4sar")
+position = Vector2(3, 4)
+shape = SubResource("CapsuleShape2D_m146o")
+debug_color = Color(0.969172, 0.154044, 0.220914, 0.42)
 
-[node name="DirectionTimer" type="Timer" parent="."]
+[node name="DealDamageArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DealDamageArea"]
+position = Vector2(4, 3)
+shape = SubResource("CapsuleShape2D_flmbi")
+debug_color = Color(0.465086, 0.567023, 0.227663, 0.42)
+
+[node name="attackDelay" type="Timer" parent="."]
+wait_time = 8.0
 autostart = true
 
 [node name="disappearDelay" type="Timer" parent="."]
@@ -331,9 +375,17 @@ debug_enabled = true
 [node name="followPlayer" type="Timer" parent="."]
 autostart = true
 
+[node name="fireball_from_hand" type="Area2D" parent="."]
+
+[node name="hand_hitbox" type="CollisionShape2D" parent="fireball_from_hand"]
+position = Vector2(-6.5, -3)
+shape = SubResource("RectangleShape2D_rp057")
+disabled = true
+debug_color = Color(0.929304, 0.256447, 0.181724, 0.42)
+
 [connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="area_entered" from="enemyBounds" to="." method="_on_enemy_bounds_area_entered"]
 [connection signal="area_exited" from="enemyBounds" to="." method="_on_enemy_bounds_area_exited"]
-[connection signal="timeout" from="DirectionTimer" to="." method="_on_direction_timer_timeout"]
+[connection signal="timeout" from="attackDelay" to="." method="_on_direction_timer_timeout"]
 [connection signal="timeout" from="disappearDelay" to="." method="_on_disappear_delay_timeout"]
 [connection signal="timeout" from="followPlayer" to="." method="_on_follow_player_timeout"]
